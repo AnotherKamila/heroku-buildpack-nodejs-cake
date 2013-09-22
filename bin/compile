@@ -187,4 +187,4 @@ echo "export PATH=\"\$HOME/bin:\$HOME/node_modules/.bin:\$PATH\"" > $BUILD_DIR/.
 # run a pre-launch cake task (to take care of things like client-side build steps)
 [[ ! -f Cakefile ]] && exit
 echo "-----> Running cake task: cake pre-launch"
-cake pre-launch
+node_modules/coffee-script/bin/cake pre-launch
