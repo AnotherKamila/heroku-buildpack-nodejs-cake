@@ -176,10 +176,15 @@ export CPPPATH="$INCLUDE_PATH:$CPPPATH"
 
 # install dependencies with npm
 echo "-----> Installing dependencies with npm"
-run_npm "install --production"
+run_npm "install"
 run_npm "rebuild"
 echo "Dependencies installed" | indent
 
 echo "-----> Building runtime environment"
 mkdir -p $BUILD_DIR/.profile.d
 echo "export PATH=\"\$HOME/bin:\$HOME/node_modules/.bin:\$PATH\"" > $BUILD_DIR/.profile.d/nodejs.sh
+
+# run a pre-launch cake task (to take care of things like client-side build steps)
+[[ ! -f Cakefile ]] && exit
+echo "-----> Running cake task: cake pre-launch"
+cake pre-launch
